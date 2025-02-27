@@ -16,6 +16,13 @@ class DatabaseHelper {
         .get();
   }
 
+  getTeacherInfoById(String id) async {
+    return await FirebaseFirestore.instance
+        .collection('Teachers')
+        .doc(id)
+        .get();
+  }
+
   uploadTeacherInfo(String username, Map<String, String> teacherInfo) async {
     try {
       await FirebaseFirestore.instance
@@ -41,6 +48,13 @@ class DatabaseHelper {
         .get();
   }
 
+  getStudentInfoById(String id) async {
+    return await FirebaseFirestore.instance
+        .collection('Students')
+        .doc(id)
+        .get();
+  }
+
   uploadStudentInfo(String username, Map<String, String> studentInfo) async {
     try {
       await FirebaseFirestore.instance
@@ -57,6 +71,13 @@ class DatabaseHelper {
         .collection('Sections')
         .where('teacherEmail', isEqualTo: teacherEmail)
         .snapshots();
+  }
+
+  getSectionInfoById(String id) async {
+    return await FirebaseFirestore.instance
+        .collection('Sections')
+        .doc(id)
+        .get();
   }
 
   createSection(String sectionName, Map<String, String> sectionInfo) {
@@ -169,6 +190,17 @@ class DatabaseHelper {
         .doc(sessionId)
         .collection('Attendees')
         .snapshots();
+  }
+
+  getAttendanceInfoById(String sectionName, String sessionId, String id) async {
+    return await FirebaseFirestore.instance
+        .collection('Attendance')
+        .doc(sectionName)
+        .collection('Sessions')
+        .doc(sessionId)
+        .collection('Attendees')
+        .doc(id)
+        .get();
   }
 
   markStudentAttendance(String sectionId, String sessionId, String rollNumber) {
