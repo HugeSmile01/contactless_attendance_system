@@ -137,7 +137,7 @@ class _StudentSignUpState extends State<StudentSignUp> {
                       SizedBox(
                         height: 10,
                       ),
-                      TextField(
+                      TextFormField(
                         controller: _emailEditingController,
                         decoration: InputDecoration(
                             fillColor: Colors.white70,
@@ -149,11 +149,20 @@ class _StudentSignUpState extends State<StudentSignUp> {
                             prefixIcon: Icon(Icons.email),
                             hintText: 'Please enter a valid email!',
                             labelText: 'Email'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                            return 'Please enter a valid email address';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(
                         height: 10,
                       ),
-                      TextField(
+                      TextFormField(
                         obscureText: true,
                         controller: _passwordEditingController,
                         decoration: InputDecoration(
@@ -166,6 +175,15 @@ class _StudentSignUpState extends State<StudentSignUp> {
                             prefixIcon: Icon(Icons.password),
                             hintText: 'Please enter your password',
                             labelText: 'Password'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          if (value.length < 6) {
+                            return 'Password must be at least 6 characters long';
+                          }
+                          return null;
+                        },
                       ),
                     ]),
                   ),
