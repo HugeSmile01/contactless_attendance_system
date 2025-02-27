@@ -16,11 +16,15 @@ class DatabaseHelper {
         .get();
   }
 
-  uploadTeacherInfo(String username, Map<String, String> teacherInfo) {
-    FirebaseFirestore.instance
-        .collection('Teachers')
-        .doc(username)
-        .set(teacherInfo);
+  uploadTeacherInfo(String username, Map<String, String> teacherInfo) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('Teachers')
+          .doc(username)
+          .set(teacherInfo);
+    } catch (e) {
+      print('Error uploading teacher info: $e');
+    }
   }
 
   getStudentInfoByEmail(String email) async {
@@ -37,11 +41,15 @@ class DatabaseHelper {
         .get();
   }
 
-  uploadStudentInfo(String username, Map<String, String> studentInfo) {
-    FirebaseFirestore.instance
-        .collection('Students')
-        .doc(username)
-        .set(studentInfo);
+  uploadStudentInfo(String username, Map<String, String> studentInfo) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('Students')
+          .doc(username)
+          .set(studentInfo);
+    } catch (e) {
+      print('Error uploading student info: $e');
+    }
   }
 
   searchSectionforTeacher(String? teacherEmail) async {

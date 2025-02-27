@@ -117,6 +117,13 @@ class _QRScanState extends State<QRScan> {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      if (result == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('No QR code scanned')),
+                        );
+                        return;
+                      }
+
                       String? data = result!.code;
                       final key = encrypt.Key.fromUtf8('VITisbestCollege');
                       final iv = encrypt.IV.fromLength(16);

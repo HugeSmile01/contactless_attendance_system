@@ -174,16 +174,36 @@ class _StudentListViewState extends State<StudentListView> {
                                     backgroundColor: MaterialStateProperty.all(
                                         Colors.green)),
                                 onPressed: () {
-                                  _databaseHelper.addStudenttoSection(
-                                      widget.sectionName,
-                                      _rollNoEditingController.text,
-                                      _nameEditingController.text,
-                                      _emailEditingController.text);
-                                  Navigator.of(context).pop();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content: Text(
-                                              'Student ${_nameEditingController.text} added!')));
+                                  _databaseHelper
+                                      .getStudentsforSection(widget.sectionName)
+                                      .then((val) {
+                                    bool studentExists = false;
+                                    val.docs.forEach((doc) {
+                                      if (doc.id ==
+                                          _rollNoEditingController.text) {
+                                        studentExists = true;
+                                      }
+                                    });
+
+                                    if (studentExists) {
+                                      Navigator.of(context).pop();
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                              content: Text(
+                                                  'Student with roll number ${_rollNoEditingController.text} already exists!')));
+                                    } else {
+                                      _databaseHelper.addStudenttoSection(
+                                          widget.sectionName,
+                                          _rollNoEditingController.text,
+                                          _nameEditingController.text,
+                                          _emailEditingController.text);
+                                      Navigator.of(context).pop();
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                              content: Text(
+                                                  'Student ${_nameEditingController.text} added!')));
+                                    }
+                                  });
                                 },
                                 child: const Text(
                                   'Add student',
