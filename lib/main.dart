@@ -15,9 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Contact-Less Attendance System',
+      title: 'ScanTrack',
       theme: ThemeData(
-        primaryColor: Colors.purple,
+        primaryColor: Color(0xFF61dafb),
+        accentColor: Color(0xFF20232a),
+        backgroundColor: Color(0xFF282c34),
       ),
       home: WelcomePage(),
     );
