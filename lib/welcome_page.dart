@@ -21,7 +21,7 @@ class _WelcomePageState extends State<WelcomePage> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Text(
-                'Welcome to Contact-Less Attendance System',
+                'Welcome to ScanTrack',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -54,7 +54,7 @@ class _WelcomePageState extends State<WelcomePage> {
                               builder: ((context) => const TeacherLogin())),
                         )),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
+                      primary: Color(0xFF61dafb),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -80,7 +80,7 @@ class _WelcomePageState extends State<WelcomePage> {
                               builder: ((context) => StudentLogin())),
                         )),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
+                      primary: Color(0xFF61dafb),
                       shape: RoundedRectangleBorder(
                         side: const BorderSide(color: Colors.green),
                         borderRadius: BorderRadius.circular(25),
